@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Java,agent,Instrumentation,">
 
 
 
@@ -86,13 +86,20 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="wonderlq - blog">
-<meta property="og:url" content="https://wonderlq.github.io/archives/2019/index.html">
+<meta name="description" content="我们在项目调试、统计、监控的时候经常会用到一些工具和指令，比如btrace、jprofile、arthas 等开源工具，比如 jmap、jstack等常用指令。 生产环境也用它们排查问题。那它们的实现原理是什么呢？">
+<meta name="keywords" content="Java,agent,Instrumentation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Instrumentation">
+<meta property="og:url" content="https://wonderlq.github.io/2019/02/01/Java-Instrumentation/index.html">
 <meta property="og:site_name" content="wonderlq - blog">
+<meta property="og:description" content="我们在项目调试、统计、监控的时候经常会用到一些工具和指令，比如btrace、jprofile、arthas 等开源工具，比如 jmap、jstack等常用指令。 生产环境也用它们排查问题。那它们的实现原理是什么呢？">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/fbfe753218108d1c69ac7b9b02bca0a2/xmlnote/F715A00058AE4E1D851D6271241257A7/15793">
+<meta property="og:updated_time" content="2019-02-01T09:26:56.012Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="wonderlq - blog">
+<meta name="twitter:title" content="Java Instrumentation">
+<meta name="twitter:description" content="我们在项目调试、统计、监控的时候经常会用到一些工具和指令，比如btrace、jprofile、arthas 等开源工具，比如 jmap、jstack等常用指令。 生产环境也用它们排查问题。那它们的实现原理是什么呢？">
+<meta name="twitter:image" content="https://note.youdao.com/yws/public/resource/fbfe753218108d1c69ac7b9b02bca0a2/xmlnote/F715A00058AE4E1D851D6271241257A7/15793">
 
 
 
@@ -122,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="https://wonderlq.github.io/archives/2019/">
+  <link rel="canonical" href="https://wonderlq.github.io/2019/02/01/Java-Instrumentation/">
 
 
 
 
 
-  <title>归档 | wonderlq - blog</title>
+  <title>Java Instrumentation | wonderlq - blog</title>
   
 
 
@@ -147,7 +154,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -293,72 +300,245 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
-
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        嗯..! 目前共计 1 篇日志。 继续努力。
-      </span>
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
-
-        
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wonderlq.github.io/2019/02/01/Java-Instrumentation/">
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/01/Java-Instrumentation/" itemprop="url">
-              
-                <span itemprop="name">Java Instrumentation</span>
-              
-            </a>
-        
-      </h2>
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Merlin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-01T17:15:20+08:00" content="2019-02-01">
-          02-01
-        </time>
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wonderlq - blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java Instrumentation</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-01T17:15:20+08:00">
+                2019-02-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/02/01/Java-Instrumentation/" class="leancloud_visitors" data-flag-title="Java Instrumentation">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>   我们在项目调试、统计、监控的时候经常会用到一些工具和指令，比如btrace、jprofile、arthas 等开源工具，比如 jmap、jstack等常用指令。 生产环境也用它们排查问题。那它们的实现原理是什么呢？<br><a id="more"></a><br>实际上它们都是使用 java instrument 来实现，大致流程如下：</p>
+<p><img src="https://note.youdao.com/yws/public/resource/fbfe753218108d1c69ac7b9b02bca0a2/xmlnote/F715A00058AE4E1D851D6271241257A7/15793" alt="image"></p>
+<p>简单来说是Instrumentation 提供修改类的接口，agent 提供承载Instrumentation的方法。将agent附加于应用程序，就可以实现无入侵修改。</p>
+<hr>
+<h2 id="2、详说Instrumentation-和-Agent"><a href="#2、详说Instrumentation-和-Agent" class="headerlink" title="2、详说Instrumentation 和 Agent"></a>2、详说Instrumentation 和 Agent</h2><h3 id="Instrumentation"><a href="#Instrumentation" class="headerlink" title="Instrumentation"></a>Instrumentation</h3><p>是java提供的一个接口，提供了一些方法用于查看和操作java类。主要方法如下 ：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>void addTransformer(ClassFileTransformer transformer)</td>
+<td>注册提供的转换器</td>
+</tr>
+<tr>
+<td>long getObjectSize(Object objectToSize)</td>
+<td>返回指定类的大小</td>
+</tr>
+<tr>
+<td>void retransformClasses(Class&lt;?&gt;… classes)</td>
+<td>重转换提供的类集</td>
+</tr>
+<tr>
+<td>Class[]    getAllLoadedClasses()</td>
+<td>获取当前加载的所有类 </td>
+</tr>
+<tr>
+<td>void  appendToBootstrapClassLoaderSearch(JarFile jarfile)</td>
+<td>将一个jar加入到bootstrap classloader的 classpath里    </td>
+</tr>
+</tbody>
+</table>
+<p>我们常用的是 addTransformer 方法，它会注册一个<a href="https://doc.yonyoucloud.com/doc/jdk6-api-zh/java/lang/instrument/ClassFileTransformer.html" target="_blank" rel="noopener">ClassFileTransformer</a>，以后加载的类都会被拦截，ClassFileTransformer 可直接对类字节码进行修改。已经加载过的类，我们可以执行retransformClasses 方法来重新触发ClassFileTransformer转换。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">interface  ClassFileTransformer &#123;</span><br><span class="line"></span><br><span class="line"> byte[]</span><br><span class="line">    transform(  ClassLoader         loader,</span><br><span class="line">                String              className,</span><br><span class="line">                Class&lt;?&gt;            classBeingRedefined,</span><br><span class="line">                ProtectionDomain    protectionDomain,</span><br><span class="line">                byte[]              classfileBuffer)</span><br><span class="line">        throws IllegalClassFormatException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="java-agent"><a href="#java-agent" class="headerlink" title="java agent"></a>java agent</h3><ul>
+<li>java agent 是特殊的java程序，它没有main方法，只有premain和agentmain方法。</li>
+<li>agent需要依附在一个java程序上，通过Instrumentation API与虚拟机交互。所以agent 与 Instrumentation 是密不可分的。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">//一个简单agent示例</span><br><span class="line">public class AgentTest &#123;</span><br><span class="line"> </span><br><span class="line">    public static void premain(String agentOpt, Instrumentation inst) &#123;</span><br><span class="line">        instrument(agentOpt, inst);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void agentmain(String agentOpt, Instrumentation inst) &#123;</span><br><span class="line">        instrument(agentOpt, inst);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void instrument(String agentOpt, Instrumentation inst) &#123;</span><br><span class="line">        inst.addTransformer(new ClassFileTransformer() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public byte[] transform(ClassLoader loader, String className, Class&lt;?&gt; classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException &#123;</span><br><span class="line">                //在这里可以修改字节码</span><br><span class="line">                //返回null表示不对字节码做任何修改</span><br><span class="line">                return null;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        System.out.println(&quot;Agent test&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//那 premain 和 agentmain 有什么区别呢？</span><br><span class="line"></span><br><span class="line">//1、不同的载入方式</span><br><span class="line">//* premain是 agent jar包以vm参数附加于普通java应用程序的形式载入;</span><br><span class="line">//* agentmain是以attach方式载入</span><br><span class="line">    </span><br><span class="line">//2、不同的启动时机</span><br><span class="line">//* premain 在程序main 方法执行之前执行</span><br><span class="line">//* agentmain在java程序启动后执行</span><br><span class="line"></span><br><span class="line">//3、不同的配置</span><br><span class="line">//* premain 的 MANIFEST.MF文件需配置Premain-Class属性</span><br><span class="line">//* agentmain 的 MANIFEST.MF文件需配置Agent-Class属性</span><br></pre></td></tr></table></figure>
+<p>好了，按照上面的说明，我们只需要自定义一个包含premain或者agentmain 方法的类，然后实现其逻辑，打包时定义MANIFESF.MF文件，就可以实现一个java agent程序。<a href="https://note.youdao.com/" target="_blank" rel="noopener">简单的agent demo</a></p>
+<h3 id="加载agent"><a href="#加载agent" class="headerlink" title="加载agent"></a>加载agent</h3><p>有了一个agent jar包 ，如何将其运行起来发挥作用？agent有两种加载方式：<br>1、启动时加载：配置vm参数 -javaagent:_zzz_xx_yy_.jar<br>2、启动后加载：vm启动后，attach到虚拟机加载<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">String processId = processId();</span><br><span class="line">String jarFileName = jarFileName();</span><br><span class="line">VirtualMachine virtualMachine = VirtualMachine.attach(processId);</span><br><span class="line">try &#123;</span><br><span class="line">    virtualMachine.loadAgent(jarFileName, &quot;World!&quot;);</span><br><span class="line">&#125; finally &#123;</span><br><span class="line">    virtualMachine.detach();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对于启动时加载，premain 方法会优先于main 方法执行，所以这是一个可以提前修改加载类的好时机，如果premain方法执行失败或者抛出异常，那么启动就会失败。</p>
+<p>对于启动后加载，agentmain 会在加载后执行，如果执行失败或者抛出异常，那么jvm会忽略错误，不会影响程序的正常运行。</p>
+<hr>
+<h2 id="3、完整例子-demo"><a href="#3、完整例子-demo" class="headerlink" title="3、完整例子 demo"></a>3、完整例子 <a href="https://note.youdao.com/" target="_blank" rel="noopener">demo</a></h2><ul>
+<li><p>编写需要的agent程序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动agent</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行效果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="4、字节码编辑"><a href="#4、字节码编辑" class="headerlink" title="4、字节码编辑"></a>4、字节码编辑</h2><p>waiting</p>
+<h2 id="5、Attach-API"><a href="#5、Attach-API" class="headerlink" title="5、Attach API"></a>5、Attach API</h2><p>waiting</p>
+<h2 id="6、工具简介"><a href="#6、工具简介" class="headerlink" title="6、工具简介"></a>6、工具简介</h2><h2 id="7-参考文档"><a href="#7-参考文档" class="headerlink" title="7 参考文档"></a>7 参考文档</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Merlin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wonderlq.github.io/2019/02/01/Java-Instrumentation/" title="Java Instrumentation">https://wonderlq.github.io/2019/02/01/Java-Instrumentation/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
       </div>
+    
 
-    </header>
-  </article>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/agent/" rel="tag"># agent</a>
+          
+            <a href="/tags/Instrumentation/" rel="tag"># Instrumentation</a>
+          
+        </div>
+      
 
-
+      
+      
+      
 
       
 
-    </div>
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -366,6 +546,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -386,8 +570,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -491,6 +684,22 @@ show_date_time();
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#2、详说Instrumentation-和-Agent"><span class="nav-number">1.</span> <span class="nav-text">2、详说Instrumentation 和 Agent</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Instrumentation"><span class="nav-number">1.1.</span> <span class="nav-text">Instrumentation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java-agent"><span class="nav-number">1.2.</span> <span class="nav-text">java agent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载agent"><span class="nav-number">1.3.</span> <span class="nav-text">加载agent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、完整例子-demo"><span class="nav-number">2.</span> <span class="nav-text">3、完整例子 demo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、字节码编辑"><span class="nav-number">3.</span> <span class="nav-text">4、字节码编辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、Attach-API"><span class="nav-number">4.</span> <span class="nav-text">5、Attach API</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、工具简介"><span class="nav-number">5.</span> <span class="nav-text">6、工具简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-参考文档"><span class="nav-number">6.</span> <span class="nav-text">7 参考文档</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -649,6 +858,10 @@ show_date_time();
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

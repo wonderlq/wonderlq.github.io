@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="wonderlq - blog">
 <meta property="og:description" content="公司项目压测期间，我负责的几个项目要配合支持，在联调过程中，发现一些shardbatis问题。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-10T17:14:07.320Z">
+<meta property="og:updated_time" content="2019-10-10T17:15:54.130Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shardbatis的一些问题">
 <meta name="twitter:description" content="公司项目压测期间，我负责的几个项目要配合支持，在联调过程中，发现一些shardbatis问题。">
@@ -412,7 +412,8 @@
       
 
       
-        <h4 id="公司项目压测期间，我负责的几个项目要配合支持，在联调过程中，发现一些shardbatis问题。"><a href="#公司项目压测期间，我负责的几个项目要配合支持，在联调过程中，发现一些shardbatis问题。" class="headerlink" title="公司项目压测期间，我负责的几个项目要配合支持，在联调过程中，发现一些shardbatis问题。"></a>公司项目压测期间，我负责的几个项目要配合支持，在联调过程中，发现一些shardbatis问题。</h4><a id="more"></a> 
+        <p>公司项目压测期间，我负责的几个项目要配合支持，在联调过程中，发现一些shardbatis问题。</p>
+<a id="more"></a> 
 <hr>
 <h4 id="正文"><a href="#正文" class="headerlink" title="正文:"></a>正文:</h4><p><strong>一、</strong> 项目一直用shardbatis做分表，这次压测的改动有涉及到mybatis，会新增加压测的mybatis插件。配置如下：<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  &lt;!-- 同时配置 压测插件 和 shardbatis插件 --&gt;</span><br><span class="line">&lt;plugins&gt;</span><br><span class="line">    &lt;!-- 插件：分表  --&gt;</span><br><span class="line">	&lt;plugin interceptor=&quot;com.google.code.shardbatis.plugin.ShardPlugin&quot;&gt;</span><br><span class="line">		&lt;property name=&quot;shardingConfig&quot; value=&quot;shard_config.xml&quot; /&gt;</span><br><span class="line">	&lt;/plugin&gt;</span><br><span class="line">	&lt;!--插件：压测 --&gt;</span><br><span class="line">	&lt;plugin interceptor=&quot;com.xxx.pressure.interceptor.MybatisInterceptorXXX&quot;/&gt;</span><br><span class="line">&lt;/plugins&gt;</span><br></pre></td></tr></table></figure></p>
 <p>  发现压测插件不生效，仔细看代码，它们都配置<code>method = prepare</code>  ，导致插件冲突。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Intercepts(&#123;@Signature(</span><br><span class="line">    type = StatementHandler.class,</span><br><span class="line">    method = &quot;prepare&quot;,</span><br><span class="line">    args = &#123;Connection.class&#125;</span><br><span class="line">)&#125;)</span><br><span class="line">public class ShardPlugin implements Interceptor &#123;...&#125;</span><br></pre></td></tr></table></figure></p>
@@ -678,7 +679,7 @@ show_date_time();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#公司项目压测期间，我负责的几个项目要配合支持，在联调过程中，发现一些shardbatis问题。"><span class="nav-number">1.</span> <span class="nav-text">公司项目压测期间，我负责的几个项目要配合支持，在联调过程中，发现一些shardbatis问题。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正文"><span class="nav-number">2.</span> <span class="nav-text">正文:</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#正文"><span class="nav-number">1.</span> <span class="nav-text">正文:</span></a></li></ol></div>
             
 
           </div>

@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="fastjson,java,">
 
 
 
@@ -86,17 +86,18 @@
 
 
 
-<meta name="description" content="Programmer learning">
-<meta name="keywords" content="programmer,java,go">
-<meta property="og:type" content="website">
-<meta property="og:title" content="wonderlq - blog">
-<meta property="og:url" content="https://wonderlq.github.io/index.html">
+<meta name="description" content="fastjson小结">
+<meta name="keywords" content="fastjson,java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fastjson最佳实践小结">
+<meta property="og:url" content="https://wonderlq.github.io/archives/2436c741.html">
 <meta property="og:site_name" content="wonderlq - blog">
-<meta property="og:description" content="Programmer learning">
+<meta property="og:description" content="fastjson小结">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-05-29T08:47:37.490Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="wonderlq - blog">
-<meta name="twitter:description" content="Programmer learning">
+<meta name="twitter:title" content="fastjson最佳实践小结">
+<meta name="twitter:description" content="fastjson小结">
 
 
 
@@ -126,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://wonderlq.github.io/">
+  <link rel="canonical" href="https://wonderlq.github.io/archives/2436c741.html">
 
 
 
 
 
-  <title>wonderlq - blogProgrammer learning</title>
+  <title>fastjson最佳实践小结 | wonderlq - blog</title>
   
 
 
@@ -151,8 +152,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -297,9 +297,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -329,9 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/archives/2436c741.html" itemprop="url">fastjson最佳实践小结</a></h1>
+          <h1 class="post-title" itemprop="name headline">fastjson最佳实践小结</h1>
         
 
         <div class="post-meta">
@@ -414,173 +412,45 @@
       
 
       
-        
-          <p>   fastjson小结<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/archives/2436c741.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
+        <p>   fastjson小结<br><a id="more"></a></p>
+<h5 id="1、遵循javabean-规范和json规范"><a href="#1、遵循javabean-规范和json规范" class="headerlink" title="1、遵循javabean 规范和json规范"></a>1、遵循javabean 规范和json规范</h5><p>正确实现setter、getter，用别名就加annotation（ @JSONField(name = “user_name”)）</p>
+<h5 id="2、使用正常的key"><a href="#2、使用正常的key" class="headerlink" title="2、使用正常的key"></a>2、使用正常的key</h5><p>尽量不要使用数字等字符开头的key，尽量使用符合java 的class 或property命名规范的key。例如不要使用a.1这种key</p>
+<h5 id="3、尽量使用标准的日期格式"><a href="#3、尽量使用标准的日期格式" class="headerlink" title="3、尽量使用标准的日期格式"></a>3、尽量使用标准的日期格式</h5><p>序列化和反序列化里都是用相同的dataPattern格式</p>
+<h5 id="4、尽量不要用自定义序列化和反序列化"><a href="#4、尽量不要用自定义序列化和反序列化" class="headerlink" title="4、尽量不要用自定义序列化和反序列化"></a>4、尽量不要用自定义序列化和反序列化</h5><p>除非万不得已，优先考虑使用注解过滤、别名等方式，甚至可以考虑新建一个vo类来组装实际需要的属性。使用自定义序列化千万要小心，改变了pojo–jsonstring的自然对应关系，不利于代码阅读和排查问题；反序列化可能会出错。</p>
+<h5 id="5、尽量避免循环引用"><a href="#5、尽量避免循环引用" class="headerlink" title="5、尽量避免循环引用"></a>5、尽量避免循环引用</h5><h5 id="6、注意编码和不可见字符"><a href="#6、注意编码和不可见字符" class="headerlink" title="6、注意编码和不可见字符"></a>6、注意编码和不可见字符</h5><p>对于inputstream、outputstream的处理，有时候会报一些奇怪的错误，日志的json字符串正常，但就是报错。这可能就是编码问题，也有可能是utf-8文件的bom头，这些潜在的问题可能在二进制数据转文本的时候，因为一些不可见字符无法显示，导致日志看起来只有正常字符而是正确的，问题很难排查。</p>
+<hr>
+<h5 id="使用实例："><a href="#使用实例：" class="headerlink" title="使用实例："></a>使用实例：</h5><ul>
+<li>1、序列化一个对象成json字符串</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">User user= new User();</span><br><span class="line">user.setName(&quot;xiaoMing&quot;);</span><br><span class="line">user.setAge(3);</span><br><span class="line">String jsonString = JSON.toJSONString(user);</span><br><span class="line">System.out.println(jsonString);</span><br><span class="line">//&#123;&quot;age&quot;:3,&quot;name&quot;:&quot;xiaoMing&quot;&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2、反序列化一个json串为java对象</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">String jsonString = &quot;&#123;\&quot;age\&quot;:3,\&quot;birthdate\&quot;:1496738822842,\&quot;name\&quot;:\&quot;校长\&quot;,\&quot;old\&quot;:true,\&quot;salary\&quot;:123456789.0123&#125;&quot;;</span><br><span class="line"> User u = JSON.parseObject(jsonString ,User.class);</span><br><span class="line"> System.out.println(u.getName());</span><br><span class="line"> // 输出 校长</span><br><span class="line"></span><br><span class="line">String jsonStringArray = &quot;[&#123;\&quot;age\&quot;:3,\&quot;birthdate\&quot;:1496738822842,\&quot;name\&quot;:\&quot;校长\&quot;,\&quot;old\&quot;:true,\&quot;salary\&quot;:123456789.0123&#125;]&quot;;</span><br><span class="line">List&lt;User&gt; userList = JSON.parseArray(jsonStringArray, User.class);</span><br><span class="line">System.out.println(userList.size());</span><br><span class="line">// 输出 1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>3、日志输出格式</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static class Model &#123;</span><br><span class="line">        @JSONField(format = &quot;MMM dd, yyyy h:mm:ss aa&quot;)</span><br><span class="line">        private java.util.Date date;</span><br><span class="line"></span><br><span class="line">        public java.util.Date getDate() &#123;</span><br><span class="line">            return date;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setDate(java.util.Date date) &#123;</span><br><span class="line">            this.date = date;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @JSONField(format = &quot;MMM-dd-yyyy h:mm:ss aa&quot;)</span><br><span class="line">        public java.sql.Date date2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>4、特性设置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">QuoteFieldNames, //key使用引号</span><br><span class="line">UseSingleQuotes, //使用单引号</span><br><span class="line">WriteMapNullValue, //输出Map的null值</span><br><span class="line">WriteEnumUsingToString, //枚举属性输出toString的结果</span><br><span class="line">WriteEnumUsingName, //枚举数据输出name</span><br><span class="line">UseISO8601DateFormat, //使用日期格式</span><br><span class="line">WriteNullListAsEmpty, //List为空则输出[]</span><br><span class="line">WriteNullStringAsEmpty, //String为空则输出””</span><br><span class="line">WriteNullNumberAsZero, //Number类型为空则输出0</span><br><span class="line">WriteNullBooleanAsFalse, //Boolean类型为空则输出false</span><br><span class="line">SkipTransientField,</span><br><span class="line">SortField, //排序字段</span><br><span class="line">WriteTabAsSpecial,</span><br><span class="line">PrettyFormat, // 格式化JSON缩进</span><br><span class="line">WriteClassName, // 输出类名</span><br><span class="line">DisableCircularReferenceDetect, // 禁止循环引用</span><br><span class="line">WriteSlashAsSpecial, // 对斜杠’/’进行转义</span><br><span class="line">BrowserCompatible,</span><br><span class="line">WriteDateUseDateFormat, // 全局修改日期格式,默认为false。JSON.DEFFAULT_DATE_FORMAT = “yyyy-MM-dd”;JSON.toJSONString(obj, SerializerFeature.WriteDateUseDateFormat);</span><br><span class="line">NotWriteRootClassName,</span><br><span class="line">DisableCheckSpecialChar,</span><br><span class="line">BeanToArray,</span><br><span class="line">WriteNonStringKeyAsString,</span><br><span class="line">NotWriteDefaultValue,</span><br><span class="line">BrowserSecure,</span><br><span class="line">IgnoreNonFieldGetter,</span><br><span class="line">WriteNonStringValueAsString,</span><br><span class="line">IgnoreErrorGetter,</span><br><span class="line">WriteBigDecimalAsPlain,</span><br><span class="line">MapSortField</span><br><span class="line">使用示例如下（可以参见此处）：</span><br><span class="line">Word word = new Word();</span><br><span class="line">word.setA(&quot;a&quot;);</span><br><span class="line">word.setB(2);</span><br><span class="line">word.setC(true);</span><br><span class="line">word.setD(&quot;d&quot;);</span><br><span class="line">word.setE(&quot;&quot;);</span><br><span class="line">word.setF(null);</span><br><span class="line">word.setDate(new Date());</span><br><span class="line"></span><br><span class="line">System.out.println(JSON.toJSONString(word));</span><br><span class="line">System.out.println(JSON.toJSONString(word, SerializerFeature.PrettyFormat,</span><br><span class="line">    SerializerFeature.WriteMapNullValue, SerializerFeature.WriteNullStringAsEmpty,</span><br><span class="line">    SerializerFeature.DisableCircularReferenceDetect,</span><br><span class="line">    SerializerFeature.WriteNullListAsEmpty));</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>5、注解使用<br>1) JSONField<br>可以配置在属性（setter、getter）和字段（必须是public field）上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">package com.alibaba.fastjson.annotation;</span><br><span class="line"></span><br><span class="line">public @interface JSONField &#123;</span><br><span class="line">    // 配置序列化和反序列化的顺序，1.1.42版本之后才支持</span><br><span class="line">    int ordinal() default 0;</span><br><span class="line"></span><br><span class="line">     // 指定字段的名称</span><br><span class="line">    String name() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">    // 指定字段的格式，对日期格式有用</span><br><span class="line">    String format() default &quot;&quot;;</span><br><span class="line"></span><br><span class="line">    // 是否序列化</span><br><span class="line">    boolean serialize() default true;</span><br><span class="line"></span><br><span class="line">    // 是否反序列化</span><br><span class="line">    boolean deserialize() default true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@JSONField(name=&quot;ID&quot;)</span><br><span class="line">public int getId() &#123;return id;&#125;</span><br><span class="line"></span><br><span class="line">// 配置date序列化和反序列使用yyyyMMdd日期格式</span><br><span class="line">@JSONField(format=&quot;yyyyMMdd&quot;)</span><br><span class="line">public Date date1;  </span><br><span class="line"></span><br><span class="line"> // 不序列化</span><br><span class="line"> @JSONField(serialize=false)</span><br><span class="line"> public Date date2;</span><br><span class="line"></span><br><span class="line"> // 不反序列化</span><br><span class="line"> @JSONField(deserialize=false)</span><br><span class="line"> public Date date3;</span><br><span class="line"></span><br><span class="line"> // 按ordinal排序</span><br><span class="line"> @JSONField(ordinal = 2)</span><br><span class="line"> private int f1;</span><br><span class="line"></span><br><span class="line"> @JSONField(ordinal = 1)</span><br><span class="line"> private int f2;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>6、object 转map</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, Object&gt; paramsMap = JSON.parseObject(JSON.toJSONString(request));</span><br><span class="line">User u = new User();</span><br><span class="line">u.setName(&quot;xiaoMing&quot;);</span><br><span class="line"></span><br><span class="line"> Map&lt;String, Object&gt; paramsMap1 = (Map&lt;String, Object&gt;) JSON.toJSON(u);</span><br><span class="line"> System.out.println(paramsMap1.get(&quot;name&quot;)); //xiaoMing</span><br><span class="line"> System.out.println(paramsMap1.get(&quot;age&quot;));//null</span><br><span class="line"> System.out.println(paramsMap1.containsKey(&quot;age&quot;));//true</span><br><span class="line"></span><br><span class="line"> Map&lt;String, Object&gt; paramsMap = JSON.parseObject(JSON.toJSONString(u));</span><br><span class="line"> System.out.println(paramsMap.get(&quot;name&quot;));//xiaoMing</span><br><span class="line"> System.out.println(paramsMap.get(&quot;age&quot;));//null</span><br><span class="line"> System.out.println(paramsMap.containsKey(&quot;age&quot;));//false</span><br></pre></td></tr></table></figure>
+<p>使用(Map&lt;String, Object&gt;) JSON.toJSON(u); 会把空值设置为“null” 字符串，导致异常。所以在转map时，建议使用JSON.parseObject(JSON.toJSONString(u));</p>
+<ul>
+<li>7、使用typereference处理反序列化泛型问题</li>
+</ul>
+<hr>
+<h5 id="jsonobject的使用"><a href="#jsonobject的使用" class="headerlink" title="jsonobject的使用"></a>jsonobject的使用</h5><p>jsonobject是json字符串和pojo对象转换过程中的中间表达类型，==++实现了map接口++==。 可以看作是一个模拟json对象键值对再加上多层嵌套的数据集合，对象的每一个基本属性是map里的一个key-value，一个非基本类型属性是一个嵌套的jsonobject对象（key是属性名称，value是表示这个属性值的对象的jsonobject）。<br>对于jsonstring 转 pojo 或者pojo转jsonstring，尽量使用直接转的方式，而不是先转成jsonobject过渡的方式。对于fastjson，由于性能优化的考虑，这来两个执行的代码是不一样的，可能导致不一样的结果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">String jsonstring = &quot;&#123;\&quot;a\&quot;:12&#125;&quot;;</span><br><span class="line"></span><br><span class="line">// 不推荐这种方式</span><br><span class="line">// 除非这里需要对jsonObject做一些简单处理</span><br><span class="line">JSONObject jsonObject = JSON.parseObject(jsonstring);</span><br><span class="line">A a = jsonObject.toJavaObject(A.class);</span><br><span class="line"></span><br><span class="line">// 推荐方式</span><br><span class="line">A a = JSON.parseObject(jsonstring, A.class);</span><br></pre></td></tr></table></figure>
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wonderlq.github.io/archives/1c130d14.html">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Merlin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wonderlq - blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/archives/1c130d14.html" itemprop="url">Shardbatis的一些问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-11T01:00:00+08:00">
-                2019-10-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/archives/1c130d14.html" class="leancloud_visitors" data-flag-title="Shardbatis的一些问题">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>公司项目压测期间，我负责的几个项目要配合支持，在联调过程中，发现一些shardbatis问题。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/archives/1c130d14.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
       
     </div>
     
@@ -592,17 +462,59 @@
     
 
     
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Merlin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://wonderlq.github.io/archives/2436c741.html" title="fastjson最佳实践小结">https://wonderlq.github.io/archives/2436c741.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/fastjson/" rel="tag"># fastjson</a>
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/archives/1c130d14.html" rel="next" title="Shardbatis的一些问题">
+                <i class="fa fa-chevron-left"></i> Shardbatis的一些问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -612,167 +524,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wonderlq.github.io/archives/a9d6e545.html">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Merlin">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="wonderlq - blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/archives/a9d6e545.html" itemprop="url">Java Instrumentation</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-01T17:15:20+08:00">
-                2019-02-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/archives/a9d6e545.html" class="leancloud_visitors" data-flag-title="Java Instrumentation">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>   我们在项目调试、排查问题、性能监控的时候经常会用到一些开源工具，比如btrace、jprofile、arthas。今天这篇文章就带你了解下这些工具背后的实现原理：Java Instrumentation</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/archives/a9d6e545.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -780,6 +536,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -800,8 +560,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -905,6 +674,22 @@ show_date_time();
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、遵循javabean-规范和json规范"><span class="nav-number">1.</span> <span class="nav-text">1、遵循javabean 规范和json规范</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、使用正常的key"><span class="nav-number">2.</span> <span class="nav-text">2、使用正常的key</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、尽量使用标准的日期格式"><span class="nav-number">3.</span> <span class="nav-text">3、尽量使用标准的日期格式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、尽量不要用自定义序列化和反序列化"><span class="nav-number">4.</span> <span class="nav-text">4、尽量不要用自定义序列化和反序列化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、尽量避免循环引用"><span class="nav-number">5.</span> <span class="nav-text">5、尽量避免循环引用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6、注意编码和不可见字符"><span class="nav-number">6.</span> <span class="nav-text">6、注意编码和不可见字符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用实例："><span class="nav-number">7.</span> <span class="nav-text">使用实例：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#jsonobject的使用"><span class="nav-number">8.</span> <span class="nav-text">jsonobject的使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1052,6 +837,10 @@ show_date_time();
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
